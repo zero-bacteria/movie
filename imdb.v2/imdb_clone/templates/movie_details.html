@@ -59,6 +59,7 @@
                <ul class="collection">
 
                   <li class="collection-item avatar">
+                    <img src="{% static 'img/icons/star.png' %}" class="circle" alt="">
                     <span class="title">Rated</span>
                     <p><b>{{ reviews_avg.rate__avg }}</b> by <b>{{ reviews_count }}</b> people </p>
                   </li>
@@ -125,7 +126,7 @@
                 {% if user.is_authenticated %}
                   <a href="{% url 'rate-movie' movie_data.imdbID %}" class="waves-effect waves-light btn"><i class="material-icons left">star</i>Rate</a>
                   <a href="{% url 'add-movies-to-watch' movie_data.imdbID %}" class="waves-effect waves-light btn"><i class="material-icons left">playlist_add</i>Watchlist</a>
-                  <a href="{% url 'add-movies-watched' movie_data.imdbID %}" class="waves-effect waves-light btn"><i class="material-icons left">playlist_add_checked</i>Watched</a>
+                  <a href="{% url 'add-movies-watched' movie_data.imdbID %}" class="waves-effect waves-light btn"><i class="material-icons left">fact_check</i>Watched</a>
                 {% endif %}
 
             </div>
