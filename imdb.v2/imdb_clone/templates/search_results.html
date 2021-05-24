@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css %}
+.card-container {
+  position: relative;
+}
+.card-pack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+}
+.next {
+  position: absolute;
+  bottom: 0;
+}
+{% endblock css %}
+
 {% block banner %}
 
     <div id="index-banner">
@@ -16,10 +32,10 @@
 
 {% block content %}
       <!--   Icon Section   -->
-      <div class="row">
+      <div class="row card-container">
 
         {% for movie in movie_data.Search %}
-          <div class="col s12 m4">
+          <div class="col s12 m4 card-pack">
             <div class="card z-depth-4">
               <div class="card-image">
 
@@ -39,10 +55,9 @@
           </div>
         {% endfor %}
 
-
-      <div class="col s12 m12 center-align">
-        <a href="{% url 'pagination' query page_number %}" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Load more</a>
-      <div>
+        <div class="next col s12 m12 center-align">
+          <a href="{% url 'pagination' query page_number %}" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Load more</a>
+        <div>
 
       </div>
 
@@ -51,3 +66,29 @@
 
 
 {% endblock %}
+
+{% block script %}
+<script>
+  function setLayout() {
+    console.log('set!')
+    let column;
+    if (window.innerWidth <= 600) column = 1;
+    else column = 3;
+    const stack = Array.from({ length: column }, () => 0);
+    const elems = document.querySelectorAll('.card-pack');
+    const { width } = elems[0].getBoundingClientRect();
+    
+    elems.forEach(item => {
+      const min = Math.min(...stack)
+      const minIdx = stack.indexOf(min)
+      item.style.top = `${min}px`;
+      item.style.left = `${minIdx*width}px`;
+      const {height} = item.getBoundingClientRect();
+      stack[minIdx] += height;
+      console.log(stack)
+    })
+  }
+  setLayout();
+  document.addEventListener('resize', setLayout);
+</script>
+{% endblock script %}
