@@ -25,7 +25,6 @@
 
 
 <!-- Dropdown Structure -->
-<ul><a href="{% url 'community:index' %}">커뮤니티</a><ul>
 <ul id="dropdown1" class="dropdown-content">
   {% if user.is_authenticated %}
     <li><a href="{% url 'profile' user.username %}">프로필</a></li>
@@ -39,13 +38,15 @@
   <div class="nav-wrapper">
     <a href="{% url 'index' %}" class="brand-logo"> <img src="{% static 'img/logo3.png' %}" alt="logo"></a>
     <ul class="right hide-on-med-and-down">
+    {% comment %} <ul><a class ="white-text" href="{% url 'community:index' %}">커뮤니티</a><ul> {% endcomment %}
       <!-- Dropdown Trigger -->
-    {% if user.is_authenticated %}
-      <li><a class="dropdown-trigger white-text" href="#!" data-target="dropdown1">{{ user.username }}<i class="material-icons right">arrow_drop_down</i></a>  
-    {% else %}
-      <li><a class="white-text" href="{% url 'login' %}">Sign in</a></li>
-    {% endif %}
-
+    <ul>
+      {% if user.is_authenticated %}
+        <li><a class="dropdown-trigger white-text" href="#!" data-target="dropdown1">{{ user.username }}<i class="material-icons right">arrow_drop_down</i></a>  
+      {% else %}
+        <li><a class="white-text" href="{% url 'login' %}">회원가입</a></li>
+      {% endif %}
+    </ul>
 
       </li>
     </ul>
