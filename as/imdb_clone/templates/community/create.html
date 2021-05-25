@@ -5,8 +5,8 @@
   <form action="" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit">
-  </form>
   <hr>
-  <a href="{% url 'community:index' %}">뒤로가기</a>
+    <button class="btn black white-text right" type="submit"><b>제출하기</b></button>
+  </form>
+  <button class="btn black white-text left" href="{% url 'community:index' %}"><b>뒤로가기</b></button>
 {% endblock %}

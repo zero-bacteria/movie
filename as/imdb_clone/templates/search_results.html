@@ -11,9 +11,8 @@
   left: 0;
   padding: 10px;
 }
-.next {
-  position: absolute;
-  bottom: 0;
+#next {
+  display: none;
 }
 {% endblock css %}
 
@@ -22,7 +21,6 @@
     <div id="index-banner">
     <div class="section no-pad-bot">
       <div class="container">
-        <h2 class="header deep-orange-text">Search results for:</h2>
         <h3 class="header black-text">{{ query }}</h3>
       </div>
     </div>
@@ -55,10 +53,10 @@
           </div>
         {% endfor %}
 
-        <div class="col s12 m12 center-align">
+        <a id="next" href="{% url 'pagination' query page_number %}" class="waves-effect waves-light btn"></a>
+        {% comment %} <div class="next col s12 m12 center-align">
           <a href="{% url 'pagination' query page_number %}" class="waves-effect waves-light btn"><i class="material-icons left" >add</i>Load more</a>
-        <div>
-
+        <div> {% endcomment %}
       </div>
 
     </div>
@@ -68,6 +66,8 @@
 {% endblock %}
 
 {% block script %}
+
+
 <script>
   function setLayout() {
     let column;
@@ -95,6 +95,16 @@
 
   setLayout();
   window.addEventListener('resize', setLayout);
+
+  var noMore = false; 
+  $(window).scroll(function(){
+      var scrollTop = $(window).scrollTop();
+      var innerHeight = $(window).height();
+      var scrollHeight = $(document).height();
+      if (scrollTop + innerHeight >= scrollHeight) {
+        $(next).get(0).click();
+      }
+  });
   
 </script>
 {% endblock script %}

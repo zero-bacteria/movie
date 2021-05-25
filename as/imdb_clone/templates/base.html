@@ -17,6 +17,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <noscript><link rel="stylesheet" href="{% static 'css/noscript.css' %}" /></noscript>
   <style>
     {% block css %}{% endblock css %}
   </style>
@@ -37,14 +38,15 @@
 <nav class="black">
   <div class="nav-wrapper">
     <a href="{% url 'index' %}" class="brand-logo"> <img src="{% static 'img/logo3.png' %}" alt="logo"></a>
+    <a style="margin-left: 10rem" href="{% url 'community:index' %}"><img src="{% static 'img/comm4.png'%}" alt=""></a>
     <ul class="right hide-on-med-and-down">
-    {% comment %} <ul><a class ="white-text" href="{% url 'community:index' %}">커뮤니티</a><ul> {% endcomment %}
+    {% comment %} <ul style="margin-right: 10px"><a class="white-text left" href="{% url 'community:index' %}">커뮤니티</a><ul> {% endcomment %}
       <!-- Dropdown Trigger -->
     <ul>
       {% if user.is_authenticated %}
-        <li><a class="dropdown-trigger white-text" href="#!" data-target="dropdown1">{{ user.username }}<i class="material-icons right">arrow_drop_down</i></a>  
+        <li><a class="dropdown-trigger white-text" href="#!" data-target="dropdown1">{{ user.username }}<i class="material-icons">arrow_drop_down</i></a>  
       {% else %}
-        <li><a class="white-text" href="{% url 'login' %}">회원가입</a></li>
+        <li><a class="white-text" href="{% url 'login' %}">로그인</a></li>
       {% endif %}
     </ul>
 
@@ -63,12 +65,12 @@
     {% endblock %}
 
   </div> 
-  <footer class="page-footer black">
+  {% comment %} <footer class="page-footer black">
     <div class="container center-align">
       <i class="fa fa-github"></i> Made by <a style="text-decoration: none" class="brown-text text-lighten-3" href="https://github.com/zero-bacteria"> zero-bacteria</a> &
       <a style="text-decoration: none" class="brown-text text-lighten-3" href="https://github.com/ssabum">ssabum</a><br><br>
     </div>
-  </footer>
+  </footer> {% endcomment %}
 
   <!--  Scripts-->
   <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -82,5 +84,9 @@
   <script src="{% static 'js/materialize.js' %}"></script>
   <script src="{% static 'js/init.js' %}"></script>
   {% block script %}{% endblock script %}
+  <script src="{% static 'js/browser.min.js' %}"></script>
+  <script src="{% static 'js/breakpoints.min.js' %}"></script>
+  <script src="{% static 'js/util.js"></script>
+
   </body>
 </html>

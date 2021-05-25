@@ -1,6 +1,13 @@
 {% extends 'base_index.html' %}
 {% load static %}
 
+{% block css %}
+.community {
+  position: absolute;
+  left: 0;
+}
+{% endblock %}
+
 {% block banner %}
 
   <div class="animationload">
@@ -36,18 +43,19 @@
     <div class="content">
       <ul id="dropdown1" class="dropdown-content">
         {% if user.is_authenticated %}
-        <li><a href="{% url 'profile' user.username %}">Profile</a></li>
-        <li><a href="{% url 'change-password' %}">Change Password</a></li>
+        <li><a href="{% url 'profile' user.username %}">프로필</a></li>
+        <li><a href="{% url 'change-password' %}">비밀번호 변경</a></li>
         <li class="divider"></li>
-        <li><a href="{% url 'logout' %}">Log out</a></li>
+        <li><a href="{% url 'logout' %}">로그아웃</a></li>
         {% endif %}
       </ul> 
       <div class="nav-wrapper" style="margin-right: 15px">
         <ul class="right hide-on-med-and-down">
+        <a class ="community white-text" href="{% url 'community:index' %}"><img src="{% static 'img/comm5.png'%}" alt=""></a>
         {% if user.is_authenticated %}
           <li><a class="dropdown-trigger white-text" href="#!" data-target="dropdown1">{{ user.username }}<i class="material-icons right">arrow_drop_down</i></a>  
         {% else %}
-          <li><a class="white-text" href="{% url 'login' %}">Sign in</a></li>
+          <li><a class="white-text" href="{% url 'login' %}">로그인</a></li>
         {% endif %}
           </li>
         </ul>
