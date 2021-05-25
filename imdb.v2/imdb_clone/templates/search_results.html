@@ -55,8 +55,8 @@
           </div>
         {% endfor %}
 
-        <div class="next col s12 m12 center-align">
-          <a href="{% url 'pagination' query page_number %}" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Load more</a>
+        <div class="col s12 m12 center-align">
+          <a href="{% url 'pagination' query page_number %}" class="waves-effect waves-light btn"><i class="material-icons left" >add</i>Load more</a>
         <div>
 
       </div>
@@ -70,7 +70,6 @@
 {% block script %}
 <script>
   function setLayout() {
-    console.log('set!')
     let column;
     if (window.innerWidth <= 600) column = 1;
     else column = 3;
@@ -85,10 +84,17 @@
       item.style.left = `${minIdx*width}px`;
       const {height} = item.getBoundingClientRect();
       stack[minIdx] += height;
-      console.log(stack)
     })
   }
+
+  if (self.name != 'reload') {
+      self.name = 'reload';
+      self.location.reload(true);
+  }
+  else self.name = '';
+
   setLayout();
-  document.addEventListener('resize', setLayout);
+  window.addEventListener('resize', setLayout);
+  
 </script>
 {% endblock script %}
