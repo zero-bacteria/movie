@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<background-image src="..img/marvel.jpg"></background-image>
+  <br>
+  <h4 class="text-center mt-5 mb-5">지상 최대의 무비모아에서 영화에 관한 이야기를 공유하세요!</h4>
+  <hr>
+  <div>
+  <button type="button" class="btn btn-outline-dark"><a href="{% url 'community:notice' %}">공지사항</a><br></button>
+  <a href="{% url 'community:help' %}">문의 & 요청사항</a><br>
+  <a href="{% url 'community:info' %}">정보게시판</a><br>
+  <a href="{% url 'community:marvel' %}">마블 극장</a><br>
+  <a href="{% url 'community:tarantino' %}">타란티노 극장</a><br>
+  <a href="{% url 'community:korean' %}">한국영화 극장</a><br>
+  <a href="{% url 'community:nolan' %}">놀란 극장</a><br>
+  </div>
+  <br>
+
+  <hr>
+  <div class="">
+    <h4>인기글</h4>
+    {% if user.is_authenticated %}
+      <button class="justify-content-end"><a href="{% url 'community:create' %}">글쓰기</a></button>
+    {% else %}
+      <a href="{% url 'login' %}">글을 작성하려면 로그인하세요</a>
+    {% endif %}
+  </div>
+  <hr>
+  {% for article in articles %}
+    <p>
+    <h5><a href="{% url 'community:detail' article.pk %}">{{ article.title }}</a></h5>
+    <p></a><b>극장 : {{ article.cate }}</b></p>
+    <p><b>작성자 : {{ article.user }}</a></b></p>
+    </p>
+    <hr>
+  {% endfor %}
+  
+{% endblock %}
