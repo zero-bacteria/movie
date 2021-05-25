@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block css %}
+body{
+  background-image: url("{% static 'img/parasite.jpg' %}");
+}
 
+{% endblock  %}
 {% block content %}
   <h1>한국영화 극장</h1>
   <p>신토불이 영화를 사랑하는 사람들의 모임</p>

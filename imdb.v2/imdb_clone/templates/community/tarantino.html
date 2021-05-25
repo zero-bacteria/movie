@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block css %}
+body{
+  background-image: url("{% static 'img/tarantino.jpg' %}");
+}
 
+{% endblock  %}
 {% block content %}
   <h1>타란티노 극장</h1>
   <p>타란티노 극장에 오신것을 환영합니다!</p>
