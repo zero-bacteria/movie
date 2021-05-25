@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Theaters</h1>
-  <a href="{% url 'community:notice' %}">Notice</a><br>
-  <a href="{% url 'community:help' %}">HELP</a><br>
-  <a href="{% url 'community:info' %}">Informations</a><br>
-  <a href="{% url 'community:marvel' %}">Marvel Theater</a><br>
-  <a href="{% url 'community:tarantino' %}">Tarantino Theater</a><br>
-  <a href="{% url 'community:korean' %}">Korean Theater</a><br>
-  <a href="{% url 'community:nolan' %}">Nolan Theater</a><br>
+  <h1>커뮤니티</h1>
+  <a href="{% url 'community:notice' %}">공지사항</a><br>
+  <a href="{% url 'community:help' %}">문의 & 요청사항</a><br>
+  <a href="{% url 'community:info' %}">정보게시판</a><br>
+  <a href="{% url 'community:marvel' %}">마블 극장</a><br>
+  <a href="{% url 'community:tarantino' %}">타란티노 극장</a><br>
+  <a href="{% url 'community:korean' %}">한국영화 극장</a><br>
+  <a href="{% url 'community:nolan' %}">놀란 극장</a><br>
   <br>
-  <h2>Hot Tickets</h2>
+  <p>지상 최대의 무비모아에서 영화에 관한 이야기를 공유하세요!</p>
+  <h2>인기글</h2>
   {% if user.is_authenticated %}
     <a href="{% url 'community:create' %}">NEW</a>
   {% else %}
@@ -18,7 +19,6 @@
   {% endif %}
   <hr>
   {% for article in articles %}
-    {{ article }}
     <p><b>극장 : {{ article.cate }}</b></p>
     <p><b>작성자 : <a href="{% url 'profile' article.user.username %}">{{ article.user }}</a></b></p>
     <p>글 제목: {{ article.title }}</p>

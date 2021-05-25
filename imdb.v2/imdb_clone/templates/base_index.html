@@ -5,7 +5,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>영화모아</title>
+  <title>무비모아</title>
   <link rel="icon" href="{% static 'img/icons/favicon.ico' %}">
 
   <!-- CSS  -->
@@ -23,16 +23,16 @@
 {% block banner %}
 {% endblock %}
 
-  <div class="container">
+  {% comment %} <div class="container">
 
     {% block content %}
     {% endblock %}
 
-  </div> 
+  </div>  {% endcomment %}
   <footer class="page-footer black">
     <div class="container center-align">
-      Made by <a style="text-decoration: none" class="brown-text text-lighten-3" href="https://github.com/zero-bacteria"><i class="fa fa-github"></i> zero-bacteria</a> &
-      <a style="text-decoration: none" class="brown-text text-lighten-3" href="https://github.com/ssabum"><i class="fa fa-github"></i> ssabum</a><br><br>
+      <i class="fa fa-github"></i> Made by <a style="text-decoration: none" class="brown-text text-lighten-3" href="https://github.com/zero-bacteria"> zero-bacteria</a> &
+      <a style="text-decoration: none" class="brown-text text-lighten-3" href="https://github.com/ssabum">ssabum</a><br><br>
     </div>
   </footer>
 
@@ -47,6 +47,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="{% static 'js/materialize.js' %}"></script>
   <script src="{% static 'js/init.js' %}"></script>
+  {% block script %}{% endblock script %}
 
   </body>
 </html>

@@ -17,19 +17,24 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <style>
+    {% block css %}{% endblock css %}
+  </style>
 </head>
 <body>
 
 
 <!-- Dropdown Structure -->
+<ul><a href="{% url 'community:index' %}">커뮤니티</a><ul>
 <ul id="dropdown1" class="dropdown-content">
   {% if user.is_authenticated %}
-    <li><a href="{% url 'profile' user.username %}">Profile</a></li>
-    <li><a href="{% url 'change-password' %}">Change Password</a></li>
+    <li><a href="{% url 'profile' user.username %}">프로필</a></li>
+    <li><a href="{% url 'change-password' %}">비밀번호 변경</a></li>
     <li class="divider"></li>
-    <li><a href="{% url 'logout' %}">Log out</a></li>
+    <li><a href="{% url 'logout' %}">로그아웃</a></li>
   {% endif %}
-</ul> 
+</ul>
+</div>
 <nav class="black">
   <div class="nav-wrapper">
     <a href="{% url 'index' %}" class="brand-logo"> <img src="{% static 'img/logo3.png' %}" alt="logo"></a>
@@ -59,8 +64,8 @@
   </div> 
   <footer class="page-footer black">
     <div class="container center-align">
-      Made by <a style="text-decoration: none" class="brown-text text-lighten-3" href="https://github.com/zero-bacteria"><i class="fa fa-github"></i> zero-bacteria</a> &
-      <a style="text-decoration: none" class="brown-text text-lighten-3" href="https://github.com/ssabum"><i class="fa fa-github"></i> ssabum</a><br><br>
+      <i class="fa fa-github"></i> Made by <a style="text-decoration: none" class="brown-text text-lighten-3" href="https://github.com/zero-bacteria"> zero-bacteria</a> &
+      <a style="text-decoration: none" class="brown-text text-lighten-3" href="https://github.com/ssabum">ssabum</a><br><br>
     </div>
   </footer>
 
@@ -75,6 +80,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="{% static 'js/materialize.js' %}"></script>
   <script src="{% static 'js/init.js' %}"></script>
-
+  {% block script %}{% endblock script %}
   </body>
 </html>

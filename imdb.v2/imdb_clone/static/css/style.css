@@ -492,8 +492,13 @@ li.social-btn {
     color: #fff;
 }
 
-.footer{
-    padding-bottom: 100px;
+footer {
+    position:fixed; 
+    left:0px; 
+    bottom:0px; 
+    height:60px; 
+    width:100%; 
+    padding-top: 10px;
 }
 .copyright{
     padding-top: 10px;

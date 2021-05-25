@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Korean Theater</h1>
-  <a href="{% url 'community:index' %}">[Home]</a><br>
+  <h1>한국영화 극장</h1>
+  <p>신토불이 영화를 사랑하는 사람들의 모임</p>
+  <a href="{% url 'community:index' %}">홈으로 돌아가기</a><br>
   {% if user.is_authenticated %}
-    <a href="{% url 'community:create' %}">NEW</a>
+    <a href="{% url 'community:create' %}">글쓰기</a>
   {% else %}
     <a href="{% url 'login' %}">[새 글을 작성하려면 로그인하세요]</a>
   {% endif %}
-  <hr>
   {% for article in articles %}
     <p><b>극장 : {{ article.cate }}</b></p>
     <p><b>작성자 : <a href="{% url 'profile' article.user.username %}">{{ article.user }}</a></b></p>

@@ -24,44 +24,43 @@
           <div class="card-stacked">
             <div class="card-content">
               <span class="card-title"><b>{{ movie_data.Title }}</b></span>
-              <span>{{ movie_data.Type }}</span>
               <br>
               <p>{{ movie_data.Plot }}</p>
               <br>
               <div class="divider"></div>
-              <span>Year: <b>{{ movie_data.Year }}</b></span>
-              <span class="right">Rated: <b>{{ movie_data.Rated }}</b></span>
-              <p>Released: <b>{{ movie_data.Released }}</b></p>
-              <p>Runtime: <b>{{ movie_data.Runtime }}</b></p>
+              <span>개봉년도: <b>{{ movie_data.Year }}</b></span>
+              <span class="right">평점: <b>{{ movie_data.Rated }}</b></span>
+              <p>개봉일: <b>{{ movie_data.Released }}</b></p>
+              <p>상영시간: <b>{{ movie_data.Runtime }}</b></p>
 
             {% if our_db is True %}
-              <p>Genre: {% for genre in movie_data.Genre.all %}<b><a href="{{ genre.get_absolute_url }}">{{ genre }}</a>, </b>{% endfor %}</p>
+              <p>장르: {% for genre in movie_data.Genre.all %}<b><a href="{{ genre.get_absolute_url }}">{{ genre }}</a>, </b>{% endfor %}</p>
             {% else %}
-              <p>Genre: <b>{{ movie_data.Genre }} </b></p>
+              <p>장르: <b>{{ movie_data.Genre }} </b></p>
             {% endif %}
 
 
-              <p>Director: <b>{{ movie_data.Director }}</b></p>
-              <p>Writer: <b>{{ movie_data.Writer }}</b></p>
+              <p>감독: <b>{{ movie_data.Director }}</b></p>
+              <p>작가: <b>{{ movie_data.Writer }}</b></p>
 
 
             {% if our_db is True %}
-              <p>Actors: {% for actor in movie_data.Actors.all %}<a href="{{ actor.get_absolute_url }}"><b>{{ actor }}</a>, </b>{% endfor %}</p>
+              <p>출연배우: {% for actor in movie_data.Actors.all %}<a href="{{ actor.get_absolute_url }}"><b>{{ actor }}</a>, </b>{% endfor %}</p>
             {% else %}
-              <p>Actors: <b>{{ movie_data.Actors }}</b></p>
+              <p>출연배우: <b>{{ movie_data.Actors }}</b></p>
             {% endif %}
 
 
-              <p>Language: <b>{{ movie_data.Language }}</b></p>
-              <p>Country: <b>{{ movie_data.Country }}</b></p>
-              <p>Awards: <b>{{ movie_data.Awards }}</b></p>
+              <p>언어: <b>{{ movie_data.Language }}</b></p>
+              <p>국가: <b>{{ movie_data.Country }}</b></p>
+              <p>수상내역: <b>{{ movie_data.Awards }}</b></p>
               <div class="divider"></div>
                <ul class="collection">
 
                   <li class="collection-item avatar">
                     <img src="{% static 'img/icons/star.png' %}" class="circle" alt="">
-                    <span class="title">Rated</span>
-                    <p><b>{{ reviews_avg.rate__avg }}</b> by <b>{{ reviews_count }}</b> people </p>
+                    <span class="title">Rate</span>
+                    <p><b>{{ reviews_avg.rate__avg }}</b>점 <b>{{ reviews_count }}명</b>이 참여하였습니다. </p>
                   </li>
 
 
@@ -116,17 +115,17 @@
                 </ul>
 
                 <div class="divider"></div>
-                <p>Box Office: <b>{{ movie_data.BoxOffice }}</b></p>
-                <p>imdb Votes: <b>{{ movie_data.imdbVotes }}</b></p>
+                <p>박스 오피스: <b>{{ movie_data.BoxOffice }}</b></p>
+                <p>imdb 투표: <b>{{ movie_data.imdbVotes }}</b></p>
                 <p>imdb ID: <b>{{ movie_data.imdbID }}</b></p>
-                <p>Production: <b>{{ movie_data.Production }}</b></p>
+                <p>제작사: <b>{{ movie_data.Production }}</b></p>
 
                 <br>
 
                 {% if user.is_authenticated %}
-                  <a href="{% url 'rate-movie' movie_data.imdbID %}" class="waves-effect waves-light btn"><i class="material-icons left">star</i>Rate</a>
-                  <a href="{% url 'add-movies-to-watch' movie_data.imdbID %}" class="waves-effect waves-light btn"><i class="material-icons left">playlist_add</i>Watchlist</a>
-                  <a href="{% url 'add-movies-watched' movie_data.imdbID %}" class="waves-effect waves-light btn"><i class="material-icons left">fact_check</i>Watched</a>
+                  <a href="{% url 'rate-movie' movie_data.imdbID %}" class="waves-effect waves-light btn"><i class="material-icons left">star</i>평점</a>
+                  <a href="{% url 'add-movies-to-watch' movie_data.imdbID %}" class="waves-effect waves-light btn"><i class="material-icons left">playlist_add</i>찜하기</a>
+                  <a href="{% url 'add-movies-watched' movie_data.imdbID %}" class="waves-effect waves-light btn"><i class="material-icons left">fact_check</i>봤던 영화</a>
                 {% endif %}
 
             </div>

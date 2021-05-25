@@ -34,7 +34,7 @@
                       <span>@{{ review.user.username }}</span>
                     </div>
                     <div class="col s8">
-                      <h5>Rated this movie</h5>
+                      <h5>평가하기</h5>
                       <h5>{{ review.rate }} / 10</h5>
                     </div>
                   </div>
@@ -48,7 +48,7 @@
 
       </div>
 
-      <h4>Review</h4>
+      <h4>리뷰</h4>
       <div class="divider"></div>
 
 
@@ -56,7 +56,7 @@
             <div class="col s12 m12">
               <div class="card">
                 <div class="card-content">
-                  <span class="card-title"><b>{{ review.user.first_name }} {{ review.user.last_name }}</b><span class="right">Review<i class="material-icons right">rate_review</i></span></span>
+                  <span class="card-title"><b>{{ review.user.first_name }} {{ review.user.last_name }}</b><span class="right">리뷰<i class="material-icons right">rate_review</i></span></span>
                   <p>@{{ review.user.username }}</p>
                   <p><b>{{ review.date }}</b></p>
                   <br>
@@ -70,7 +70,7 @@
             </div>
           </div>
 
-      <h4>Comments</h4>
+      <h4>댓글</h4>
       <div class="divider"></div>
 
     
@@ -107,9 +107,9 @@
                 {% csrf_token %}
                   <div class="input-field col s12">
                     {{ form.body }}
-                    <label for="textarea1">Comment</label>
+                    <label for="textarea1">댓글</label>
                   </div>
-                  <button type="submit" name="action" class="waves-effect waves-light btn"><i class="material-icons left">send</i>Send</button>
+                  <button type="submit" name="action" class="waves-effect waves-light btn"><i class="material-icons left">send</i>작성</button>
               </form>
           </div>
   </div>
