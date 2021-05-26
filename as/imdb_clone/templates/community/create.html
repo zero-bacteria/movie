@@ -8,5 +8,5 @@
   <hr>
     <button class="btn black white-text right" type="submit"><b>제출하기</b></button>
   </form>
-  <button class="btn black white-text left" href="{% url 'community:index' %}"><b>뒤로가기</b></button>
+  <button class="btn black white-text left" onclick = "location.href = '{% url 'community:index' %}'"><b>뒤로가기</b></button>
 {% endblock %}

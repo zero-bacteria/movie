@@ -2,28 +2,58 @@
 {% load static %}
 {% block css %}
 body{
-  background-image: url("{% static 'img/parasite.jpg' %}");
+  background-image: url("{% static 'img/korea.jpg' %}");
+  background-size: cover;
 }
 
 {% endblock  %}
 {% block content %}
-  <h1>한국영화 극장</h1>
-  <p>신토불이 영화를 사랑하는 사람들의 모임</p>
-  <a href="{% url 'community:index' %}">홈으로 돌아가기</a><br>
-  {% if user.is_authenticated %}
-    <a href="{% url 'community:create' %}">글쓰기</a>
-  {% else %}
-    <a href="{% url 'login' %}">[새 글을 작성하려면 로그인하세요]</a>
-  {% endif %}
-  {% for article in articles %}
-    <p><b>극장 : {{ article.cate }}</b></p>
-    <p><b>작성자 : <a href="{% url 'profile' article.user.username %}">{{ article.user }}</a></b></p>
-    <p>글 번호: {{ article.pk }}</p>
-    <p>글 제목: {{ article.title }}</p>
-    <p>글 내용: {{ article.content }}</p>
-    <span id="count-{{ article.pk }}"> 추천수: {{ article.like_users.all|length }} </span><br>
-    <a href="{% url 'community:detail' article.pk %}">[detail]</a>
+
+<div class="backcontainer" style="margin-top: 3rem; background-color: white; opacity: 0.8;">
+  <div class="center" style="padding: 3rem">
+    <img class="center" style="width: 35rem; height: 13rem;" src="{% static 'img/korea_logo.jpg'%}" alt="">
+    <h4><b>신토불이 영화를 사랑하는 사람들의 모임</b></h4>
     <hr>
-  {% endfor %}
+    <button class="btn black white-text left" onclick = "location.href = '{% url 'community:index' %}'"><b>돌아가기</b></button>
+    {% if user.is_authenticated %}
+      <button class="btn black white-text right" onclick = "location.href = '{% url 'community:create' %}'"><b>글쓰기</b></button>
+    {% else %}
+      <button class="btn black white-text right tooltip" data-position="botton" data-tooltip="로그인을 해주세요" onclick = "location.href = '{% url 'login' %}'"><b>글쓰기</b></button>
+    {% endif %}
+    <table class="striped">
+      <thead>
+        <tr>
+            <th class="center"><h5><b>제목</b></h5></th>
+            <th class="center"><h5><b>극장</b></h5></th>
+            <th class="center"><h5><b>작성자</b></h5></th>
+            <th class="center"><h5><b>내용</b></h5></th>
+            <th class="center"><h5><b>추천수</b></h5></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for article in articles %}
+          <tr>
+            <td class="center"><a href="{% url 'community:detail' article.pk %}">{{ article.title }}</a></td>
+            <td class="center">{{ article.cate }}</td>
+            <td class="center">{{ article.user }}</td>
+            <td class="center">{{ article.content }}</td>
+            <td class="center">{{ article.like_users.all|length }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% comment %} {% for article in articles %}
+      <p><b>극장 : {{ article.cate }}</b></p>
+      <p><b>작성자 : <a href="{% url 'profile' article.user.username %}">{{ article.user }}</a></b></p>
+      <p>글 번호: {{ article.pk }}</p>
+      <p>글 제목: {{ article.title }}</p>
+      <p>글 내용: {{ article.content }}</p>
+      <span id="count-{{ article.pk }}"> 추천수: {{ article.like_users.all|length }} </span><br>
+      <a href="{% url 'community:detail' article.pk %}">[detail]</a>
+      <hr>
+    {% endfor %} {% endcomment %}
+    <br>
+  </div>
+</div>
   
 {% endblock %}

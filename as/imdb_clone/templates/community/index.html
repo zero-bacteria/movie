@@ -80,7 +80,7 @@
     {% if user.is_authenticated %}
       <button class="justify-content-end btn black right" style="margin-top: 3px"><a class="white-text" href="{% url 'community:create' %}"><b>글쓰기</b></a></button>
     {% else %}
-      <button class="btn black right" style="margin-top: 3px" href="{% url 'login' %}"><div class="tooltipped white-text" data-position="bottom" data-tooltip="로그인 해주세요"><b>글쓰기</b></div></button>
+      <button class="btn black right" style="margin-top: 3px" onclick = "location.href = '{% url 'login' %}'"><div class="tooltipped white-text" data-position="bottom" data-tooltip="로그인 해주세요"><b>글쓰기</b></div></button>
     {% endif %}
   </div>
   <table class="striped">

@@ -31,12 +31,12 @@
           <i id="like-{{ article.pk }}" class="fas fa-heart fa-lg" style="color:crimson;"></i>
         </button>
       {% else %}
-        <button class="btn btn-link">
-          <i id="like-{{ article.pk }}" class="fas fa-heart fa-lg" style="color:black;"></i>
+        <button class="btn btn-link red left">
+          <i class="material-icons">favorite_border</i>
         </button>
       {% endif %}
     </form>
-    <span id="count-{{ article.pk }}">추천수: {{ article.like_users.all|length }}</span><br>
+    <span class="right" id="count-{{ article.pk }}">추천수: {{ article.like_users.all|length }}</span><br>
     <hr>
   
   
@@ -58,12 +58,12 @@
     <form action="{% url 'community:create_comment' article.pk %}" method="POST">
       {% csrf_token %}
       {{ comment_form }}
-      <input type="submit">
+      <button class="btn black white-text right" type="submit"><b>제출하기</b></button>
     </form>
   {% else %}
-    <a href="{% url 'login' %}">[댓글을 작성하려면 로그인하세요.]</a>
+    <button class="btn black white-text right tooltip" data-position="bottom" data-tooltip="로그인 해주세요" onclick = "location.href = '{% url 'login' %}'">제출하기</button>
   {% endif %}
-  <a href="{% url 'community:index' %}">[back]</a>
+  <button class="btn black white-text left" onclick = "location.href = '{% url 'community:index' %}'"><b>뒤로가기</b></button>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
