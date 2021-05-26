@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  {% if article.cate == 'MARVEL' %}
+    <h3>마블 극장</h3>
+  {% elif article.cate == 'HELP'%}
+    <h3>문의 및 요청사항<h3>
+  {% elif article.cate == 'NOTICE'%}
+    <h3>공지사항<h3>
+  {% elif article.cate == 'TARANTINO'%}
+    <h3>타란티노 극장<h3>
+  {% elif article.cate == 'KOREAN'%}
+    <h3>한국영화 극장<h3>
+  {% elif article.cate == 'NOLAN'%}
+    <h3>놀란 극장<h3>
+  {% endif %}
+  <hr>
+  <h5>{{ article.title }}</h5>
+  <br>
+  <div style="display:flex; justify-content:space-between; ">
+    <p>작성자: {{ article.user }}</p>
+    <p>조회수: {{ article.views_count }}</p>
+  </div>
+  <hr style="margin-top:0px;">
+  {% if article.picture %}
+    <img src="{{ article.picture.url }}">
+  {% endif %}
+  <div style="font-size:16px;">{{ article.content }}</div>
+  <br>
+  <hr>
+  <p>작성 시각: {{ article.created_at }}</p>
+  <p>수정 시각: {{ article.updated_at }}</p>
+  {% comment %} <p>{{ article.youtube_link }}</p> {% endcomment %}
+  {% comment %} <div>
+    <iframe src="{{ article.youtube_link }}" frameborder="0"></iframe>
+  </div>
+  <div id='youtube' style="position: relative; height:0; padding-bottom: 56.25%;">
+    <iframe width="560" height="315" src="{{ article.youtube_link }}" art="동영상을 찾을수 없습니다." frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; width:100%; height:100%;"></iframe>
+  </div> {% endcomment %}
+
+
+
+
+
+  <form class="like-form d-inline" data-id="{{ article.pk }}">
+      {% csrf_token %}
+
+      {% if user in article.like_users.all %}
+        <button class="btn btn-link">
+          <i id="like-{{ article.pk }}" class="fas fa-heart fa-lg" style="color:crimson;"></i>
+        </button>
+      {% else %}
+        <button class="btn btn-link red left">
+          <i id="like-{{ article.pk }}"class="material-icons">favorite_border</i>
+        </button>
+      {% endif %}
+    </form>
+    <span class="right" id="count-{{ article.pk }}">추천수: {{ article.like_users.all|length }}</span><br>
+
+  
+  
+  <br>
+  <hr>
+  <h4>댓글 목록</h4>
+  <br>
+  {% if comments|length %}
+    <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p><br>
+  {% endif %}
+  {% for comment in comments %}
+    <div>
+      {{ comment.user }} - {{ comment.content }}
+    </div>
+    <br>
+  {% empty %}
+    <p><b>댓글이 없어요..</b></p>
+  {% endfor %}
+  <hr>
+  {% if request.user.is_authenticated %}
+    <form action="{% url 'community:create_comment' article.pk %}" method="POST">
+      {% csrf_token %}
+      {{ comment_form }}
+      <button class="btn black white-text right" type="submit"><b>제출하기</b></button>
+    </form>
+  {% else %}
+    <button class="btn black white-text right tooltip" data-position="bottom" data-tooltip="로그인 해주세요" onclick = "location.href = '{% url 'login' %}'">제출하기</button>
+  {% endif %}
+  <button class="btn black white-text left" onclick = "location.href = '{% url 'community:index' %}'"><b>뒤로가기</b></button>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+  const forms = document.querySelectorAll('.like-form')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+  forms.forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault()
+      const articleId = event.target.dataset.id
+ axios.post(`http://127.0.0.1:8000/community/${articleId}/like/`, {}, {headers: {'X-CSRFToken' : csrftoken}})
+      .then(function (response) {
+        const liked = response.data.liked
+        const count = response.data.count
+
+        /* const require_login = response.request.responseURL.includes('login') ? response.request.responseURL : false
+        if ( require_login ) {
+      window.location.href = require_login
+        } */
+        const likeButton = document.querySelector(`#like-${articleId}`)
+        likeButton.style.color = liked ? 'crimson' : 'black'
+        const likeCount = document.querySelector(`#count-${articleId}`)
+        likeCount.innerText = `추천수: ${count}`
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          window.location.href = '../../account/login/'
+        }
+      })
+    })
+  })
+  
+  
+    
+
+  </script>
+{% endblock  %}

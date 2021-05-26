@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>정보 게시판</h1>
+  <p>사이트 이용 팁 & 각종 정보 공유 공간</p>
+  <button class="left btn black"><a class="white-text" href="{% url 'community:index' %}"><b>돌아가기</b></a><br></button>
+  {% if user.is_authenticated %}
+    <button class="btn black right"><a class="white-text" href="{% url 'community:create' %}"><b>글쓰기</b></a></button>
+  {% else %}
+    <button class="btn black right tooltip" data-position="bottom" data-tooltip="로그인 해주세요"><a class="white-text" href="{% url 'login' %}"><b>글쓰기</b></a></button>
+  {% endif %}
+  <br>
+  <br>
+  <br>
+  <div>
+    {% for article in articles %}
+      <p><b>작성자 : <a href="{% url 'profile' article.user.username %}">{{ article.user }}</a></b></p>
+      <h5><a href="{% url 'community:detail' article.pk %}">{{ article.title }}</a></h5> 
+      <hr>
+    {% endfor %}
+  </div>
+  
+{% endblock %}

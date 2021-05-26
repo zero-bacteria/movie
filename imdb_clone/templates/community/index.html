@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+.text-container {
+   height:35px;
+   overflow:hidden;
+   border-radius:10px;
+   width:80%;
+}
+.text-container ul {
+  color:#fff;
+  background:black;
+  padding-left:10px;
+  padding-right:10px;
+  text-align:center;
+  list-style:none;
+  animation: 12s linear 0s normal none infinite change1;
+  -webkit-animation: 12s linear 0s normal none infinite change1;
+  -moz-animation:12s linear 0s normal none infinite change1;
+  -o-animation:12s linear 0s normal none infinite change1;
+}
+
+.text-container ul li {
+  font-size:22px;
+  line-height:35px;
+  
+}
+
+@-webkit-keyframes change1 {
+  0%   {margin-top:0px;}
+  15%  {margin-top:0px;}
+  25%  {margin-top:-35px;}
+  40%  {margin-top:-35px;}
+  50%  {margin-top:-70px;}
+  65%  {margin-top:-70px;}
+  75%  {margin-top:-35px;}
+  85%  {margin-top:-35px;}
+  100% {margin-top:0;}
+}
+@keyframes change1 {
+  0%   {margin-top:0px;}
+  15%  {margin-top:0px;}
+  25%  {margin-top:-35px;}
+  40%  {margin-top:-35px;}
+  50%  {margin-top:-70px;}
+  65%  {margin-top:-70px;}
+  75%  {margin-top:-35px;}
+  85%  {margin-top:-35px;}
+  100% {margin-top:0;}
+}
+
+{% endblock %}
+{% block content %}
+<background-image src="..img/marvel.jpg"></background-image>
+  <br>
+  <h4 class="text-center mt-5 mb-5">지상 최대의 무비모아에서 영화에 관한 이야기를 공유하세요!</h4>
+  <hr>
+  <div class="center">
+    <button style="margin-bottom: 3px"type="button" class="btn black btn-outline-dark"><a class="white-text" href="{% url 'community:notice' %}"><b>공지사항</b></a></button>
+    <button style="margin-bottom: 3px"class="btn black"><a class="white-text" href="{% url 'community:help' %}"><b>문의 & 요청사항</b></a></button>
+    <button style="margin-bottom: 3px"class="btn black"><a class="white-text" href="{% url 'community:info' %}"><b>정보게시판</b></a></button>
+    <button style="margin-bottom: 3px"class="btn black"><a class="white-text" href="{% url 'community:marvel' %}"><b>마블 극장</b></a></button>
+    <button style="margin-bottom: 3px"class="btn black"><a class="white-text" href="{% url 'community:tarantino' %}"><b>타란티노 극장</b></a></button>
+    <button style="margin-bottom: 3px"class="btn black"><a class="white-text" href="{% url 'community:korean' %}"><b>한국영화 극장</b></a></button>
+    <button style="margin-bottom: 3px"class="btn black"><a class="white-text" href="{% url 'community:nolan' %}"><b>놀란 극장</b></a></button>
+  </div>
+  <br>
+
+  <hr>
+  <div>
+    <div class="text-container left" style="margin-left: 3rem">
+      <ul>
+        {% for article in articles %}
+          <li><a class="white-text" href="{% url 'community:detail' article.pk %}">{{ article.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% comment %} <h4>인기글</h4> {% endcomment %}
+    {% if user.is_authenticated %}
+      <button class="justify-content-end btn black right" style="margin-top: 3px"><a class="white-text" onclick = "location.href = '{% url 'community:create' %}'"><b>글쓰기</b></a></button>
+    {% else %}
+      <button class="btn black right" style="margin-top: 3px" onclick = "location.href = '{% url 'login' %}'"><div class="tooltipped white-text" data-position="bottom" data-tooltip="로그인 해주세요"><b>글쓰기</b></div></button>
+    {% endif %}
+  </div>
+  <table class="striped">
+    <thead>
+      <tr>
+          <th class="center"><h5><b>제목</b></h5></th>
+          <th class="center"><h5><b>극장</b></h5></th>
+          <th class="center"><h5><b>작성자</b></h5></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for article in articles %}
+        <tr>
+          <td class="center"><a href="{% url 'community:detail' article.pk %}">{{ article.title }}</a></td>
+          <td class="center">{{ article.cate }}</td>
+          <td class="center">{{ article.user }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <br>
+  <br>
+  
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
