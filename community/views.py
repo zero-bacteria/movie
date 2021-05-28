@@ -69,7 +69,7 @@ def korean(request):
 
 @require_GET
 def nolan(request):
-    articles = Article.objects.filter(cate='Nolan').order_by('-like_users')
+    articles = Article.objects.filter(cate='NOLAN').order_by('-like_users')
     context = {
         'articles': articles,
     }
